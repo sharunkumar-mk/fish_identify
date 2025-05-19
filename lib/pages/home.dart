@@ -26,7 +26,6 @@ class HomePageState extends State<HomePage> {
         Navigator.pop(context);
         _image = File(pickedFile.path);
       });
-      // await _sendToGemini(_image!);
     }
   }
 
