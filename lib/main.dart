@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
+  await dotenv.load(
+    fileName: ".env",
+  ); // load environmental variable. The gemni api key is stored in .env file for security
+  runApp(const MyApp()); // flutter app run from runApp()
 }
 
 class MyApp extends StatelessWidget {
