@@ -18,6 +18,7 @@ class HomePageState extends State<HomePage> {
   String? _result;
   final ImagePicker _picker = ImagePicker();
 
+  //function used to Pick Image form library or camera depending upon souce in the picImage() paramter
   Future<void> _pickImage(ImageSource source, BuildContext context) async {
     final pickedFile = await _picker.pickImage(source: source);
 
@@ -26,7 +27,6 @@ class HomePageState extends State<HomePage> {
         Navigator.pop(context);
         _image = File(pickedFile.path);
       });
-      // await _sendToGemini(_image!);
     }
   }
 
