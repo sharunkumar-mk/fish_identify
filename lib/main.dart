@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: const SplashPage(),
+      home: const SplashPage(), // initially loads Splash screen for user
     );
   }
 }

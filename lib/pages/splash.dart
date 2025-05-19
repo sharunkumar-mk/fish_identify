@@ -12,16 +12,19 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    initApp();
+    initApp(); // initApp function called
     super.initState();
   }
 
+  //function for 2 second delay for splash screen after 2 second delay screen moves to home screen
   void initApp() {
     Future.delayed(Duration(seconds: 2), () {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ), // this code move the screen to home page
       );
     });
   }

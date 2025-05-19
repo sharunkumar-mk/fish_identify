@@ -30,14 +30,20 @@ class HomePageState extends State<HomePage> {
     }
   }
 
+  //function used to send image file along with prompt to get required output
   Future<void> _sendToGemini(File imageFile) async {
     try {
-      final apiKey = dotenv.env['GEMINI_API_KEY'];
-      final base64Image = base64Encode(await imageFile.readAsBytes());
+      final apiKey = dotenv.env['GEMINI_API_KEY']; //load api key form .env file
+      final base64Image = base64Encode(
+        await imageFile.readAsBytes(),
+      ); //convert image to bytes
+
+      //this is the url to connect to gemini model
       final uri = Uri.parse(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey',
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey', //api key is also passed along with api url
       );
 
+      // jsonEncoded data is required to send to server post method
       final body = jsonEncode({
         "contents": [
           {
@@ -55,7 +61,12 @@ class HomePageState extends State<HomePage> {
       });
 
       final headers = {"Content-Type": "application/json"};
-      final response = await http.post(uri, headers: headers, body: body);
+      final response = await http.post(
+        uri,
+        headers: headers,
+        body: body,
+      ); // this is the http post request send to server the resposne is the result
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         final text = data['candidates'][0]['content']['parts'][0]['text'];
@@ -74,6 +85,7 @@ class HomePageState extends State<HomePage> {
     }
   }
 
+  //function to show a progress bar api is called and fetch response
   Future<void> _showProgress(BuildContext context) async {
     showDialog(
       context: context,
@@ -94,6 +106,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  //this is the function to show a bottom model sheet to allow user to choose the image souce, if it is from gallery or camera
   _imagePickOptions(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -153,6 +166,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
+  // this is the override build function the UI of the screen are viewed
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
