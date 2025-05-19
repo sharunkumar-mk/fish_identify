@@ -1,10 +1,12 @@
+//app packages are add form pub.dev website, the package name is added on dependency section in project pubspec.yaml file
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'; // dot env package used for environmental varilables
+import 'package:http/http.dart'
+    as http; //http package used to handle web request
+import 'package:image_picker/image_picker.dart'; // image picker package used for pick image
+import 'package:lottie/lottie.dart'; // lottie package used for showing animation
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -68,7 +70,7 @@ class HomePageState extends State<HomePage> {
       ); // this is the http post request send to server the resposne is the result
 
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+        final data = json.decode(response.body); //decode json response data
         final text = data['candidates'][0]['content']['parts'][0]['text'];
         setState(() {
           _result = text;
